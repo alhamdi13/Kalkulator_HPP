@@ -3,476 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator HPP Lengkap - Harga Pokok Penjualan</title>
+    <title>Kalkulator HPP Sederhana</title>
+    <!-- Memuat Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Menggunakan font Inter */
         body {
-            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Menghilangkan panah di input number */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-full">
-    <div class="container mx-auto px-4 py-8">
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">📊 Kalkulator HPP Lengkap</h1>
-            <p class="text-gray-600">Hitung Harga Pokok Penjualan dengan detail komponen yang akurat</p>
-        </header>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
 
-        <main class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
-                <form id="hppForm" class="space-y-8">
-                    <!-- Informasi Produk -->
-                    <div class="border-b pb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            📦 Informasi Produk
-                        </h2>
-                        <div class="grid md:grid-cols-3 gap-4">
-                            <div>
-                                <label for="namaProduk" class="block text-sm font-semibold text-gray-700 mb-2">Nama Produk</label>
-                                <input type="text" id="namaProduk" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Contoh: Kue Brownies">
-                            </div>
-                            <div>
-                                <label for="kategoriProduk" class="block text-sm font-semibold text-gray-700 mb-2">Kategori Produk</label>
-                                <select id="kategoriProduk" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                    <option value="">Pilih Kategori</option>
-                                    <option value="makanan">Makanan & Minuman</option>
-                                    <option value="fashion">Fashion & Aksesoris</option>
-                                    <option value="elektronik">Elektronik</option>
-                                    <option value="kerajinan">Kerajinan Tangan</option>
-                                    <option value="kosmetik">Kosmetik & Kecantikan</option>
-                                    <option value="lainnya">Lainnya</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="jumlahProduksi" class="block text-sm font-semibold text-gray-700 mb-2">Target Produksi (Unit)</label>
-                                <input type="number" id="jumlahProduksi" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="100" min="1">
-                            </div>
-                        </div>
-                    </div>
+    <div class="max-w-2xl w-full bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+        
+        <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-2">Kalkulator HPP Sederhana</h1>
+        <p class="text-center text-gray-500 mb-6">Hitung biaya produksi per produk untuk usaha rumahan Anda.</p>
 
-                    <!-- Biaya Bahan Baku -->
-                    <div class="border-b pb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            🥄 Biaya Bahan Baku & Material
-                        </h2>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="bahanUtama" class="block text-sm font-semibold text-gray-700 mb-2">Bahan Utama (Rp)</label>
-                                <input type="number" id="bahanUtama" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Tepung, kain, komponen utama, dll</p>
-                            </div>
-                            <div>
-                                <label for="bahanPendukung" class="block text-sm font-semibold text-gray-700 mb-2">Bahan Pendukung (Rp)</label>
-                                <input type="number" id="bahanPendukung" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Gula, benang, aksesoris, dll</p>
-                            </div>
-                            <div>
-                                <label for="bahanKemasan" class="block text-sm font-semibold text-gray-700 mb-2">Bahan Kemasan (Rp)</label>
-                                <input type="number" id="bahanKemasan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Kotak, plastik, label, stiker, dll</p>
-                            </div>
-                            <div>
-                                <label for="bahanLainnya" class="block text-sm font-semibold text-gray-700 mb-2">Bahan Lainnya (Rp)</label>
-                                <input type="number" id="bahanLainnya" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Bahan tambahan lainnya</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="space-y-6">
 
-                    <!-- Biaya Tenaga Kerja -->
-                    <div class="border-b pb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            👥 Biaya Tenaga Kerja
-                        </h2>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="gajiKaryawan" class="block text-sm font-semibold text-gray-700 mb-2">Gaji Karyawan/Bulan (Rp)</label>
-                                <input type="number" id="gajiKaryawan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Total gaji semua karyawan per bulan</p>
-                            </div>
-                            <div>
-                                <label for="upahBorongan" class="block text-sm font-semibold text-gray-700 mb-2">Upah Borongan (Rp)</label>
-                                <input type="number" id="upahBorongan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Upah per produk/project</p>
-                            </div>
-                            <div>
-                                <label for="tunjangan" class="block text-sm font-semibold text-gray-700 mb-2">Tunjangan & Bonus (Rp)</label>
-                                <input type="number" id="tunjangan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">THR, bonus, tunjangan makan, dll</p>
-                            </div>
-                            <div>
-                                <label for="jamKerjaBulan" class="block text-sm font-semibold text-gray-700 mb-2">Jam Kerja/Bulan</label>
-                                <input type="number" id="jamKerjaBulan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="160" min="1">
-                                <p class="text-xs text-gray-500 mt-1">Total jam kerja dalam sebulan</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Biaya Overhead -->
-                    <div class="border-b pb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            🏢 Biaya Overhead (Biaya Tidak Langsung)
-                        </h2>
-                        <div class="grid md:grid-cols-3 gap-4">
-                            <div>
-                                <label for="sewaTempat" class="block text-sm font-semibold text-gray-700 mb-2">Sewa Tempat/Bulan (Rp)</label>
-                                <input type="number" id="sewaTempat" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                            </div>
-                            <div>
-                                <label for="listrik" class="block text-sm font-semibold text-gray-700 mb-2">Listrik/Bulan (Rp)</label>
-                                <input type="number" id="listrik" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                            </div>
-                            <div>
-                                <label for="air" class="block text-sm font-semibold text-gray-700 mb-2">Air/Bulan (Rp)</label>
-                                <input type="number" id="air" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                            </div>
-                            <div>
-                                <label for="internet" class="block text-sm font-semibold text-gray-700 mb-2">Internet & Telepon (Rp)</label>
-                                <input type="number" id="internet" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                            </div>
-                            <div>
-                                <label for="asuransi" class="block text-sm font-semibold text-gray-700 mb-2">Asuransi/Bulan (Rp)</label>
-                                <input type="number" id="asuransi" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                            </div>
-                            <div>
-                                <label for="perawatan" class="block text-sm font-semibold text-gray-700 mb-2">Perawatan Alat (Rp)</label>
-                                <input type="number" id="perawatan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Biaya Pemasaran & Penjualan -->
-                    <div class="border-b pb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            📢 Biaya Pemasaran & Penjualan
-                        </h2>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="iklan" class="block text-sm font-semibold text-gray-700 mb-2">Iklan & Promosi (Rp)</label>
-                                <input type="number" id="iklan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Facebook Ads, Google Ads, brosur, dll</p>
-                            </div>
-                            <div>
-                                <label for="komisiPenjualan" class="block text-sm font-semibold text-gray-700 mb-2">Komisi Penjualan (Rp)</label>
-                                <input type="number" id="komisiPenjualan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Komisi sales, reseller, affiliate</p>
-                            </div>
-                            <div>
-                                <label for="ongkosKirim" class="block text-sm font-semibold text-gray-700 mb-2">Ongkos Kirim (Rp)</label>
-                                <input type="number" id="ongkosKirim" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Biaya pengiriman ke customer</p>
-                            </div>
-                            <div>
-                                <label for="marketplace" class="block text-sm font-semibold text-gray-700 mb-2">Fee Marketplace (Rp)</label>
-                                <input type="number" id="marketplace" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Tokopedia, Shopee, Lazada, dll</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Biaya Administrasi -->
-                    <div class="border-b pb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            📋 Biaya Administrasi & Lainnya
-                        </h2>
-                        <div class="grid md:grid-cols-3 gap-4">
-                            <div>
-                                <label for="administrasi" class="block text-sm font-semibold text-gray-700 mb-2">Administrasi (Rp)</label>
-                                <input type="number" id="administrasi" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">ATK, fotocopy, materai, dll</p>
-                            </div>
-                            <div>
-                                <label for="pajak" class="block text-sm font-semibold text-gray-700 mb-2">Pajak (Rp)</label>
-                                <input type="number" id="pajak" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">PPh, PPN, pajak daerah</p>
-                            </div>
-                            <div>
-                                <label for="penyusutan" class="block text-sm font-semibold text-gray-700 mb-2">Penyusutan Alat (Rp)</label>
-                                <input type="number" id="penyusutan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0" min="0">
-                                <p class="text-xs text-gray-500 mt-1">Mesin, komputer, kendaraan</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Target Keuntungan -->
-                    <div class="pb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            💰 Target Keuntungan
-                        </h2>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="marginKeuntungan" class="block text-sm font-semibold text-gray-700 mb-2">Margin Keuntungan (%)</label>
-                                <input type="number" id="marginKeuntungan" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="20" min="0" max="1000">
-                                <p class="text-xs text-gray-500 mt-1">Persentase keuntungan yang diinginkan</p>
-                            </div>
-                            <div>
-                                <label for="periodeProduksi" class="block text-sm font-semibold text-gray-700 mb-2">Periode Produksi</label>
-                                <select id="periodeProduksi" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                    <option value="harian">Per Hari</option>
-                                    <option value="mingguan">Per Minggu</option>
-                                    <option value="bulanan" selected>Per Bulan</option>
-                                    <option value="tahunan">Per Tahun</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
-                        🧮 Hitung HPP Lengkap
-                    </button>
-                </form>
-            </div>
-
-            <div id="hasilKalkulasi" class="bg-white rounded-2xl shadow-xl p-8 hidden">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📊 Hasil Kalkulasi HPP Lengkap</h2>
-                
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
-                            <span class="font-semibold text-gray-700">Nama Produk:</span>
-                            <span id="hasilNamaProduk" class="font-bold text-gray-800">-</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg">
-                            <span class="font-semibold text-gray-700">Total HPP per Unit:</span>
-                            <span id="hasilHPP" class="font-bold text-blue-600 text-xl">Rp 0</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center p-4 bg-green-50 rounded-lg">
-                            <span class="font-semibold text-gray-700">Harga Jual Disarankan:</span>
-                            <span id="hasilHargaJual" class="font-bold text-green-600 text-xl">Rp 0</span>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center p-4 bg-yellow-50 rounded-lg">
-                            <span class="font-semibold text-gray-700">Keuntungan per Unit:</span>
-                            <span id="hasilKeuntungan" class="font-bold text-yellow-600 text-xl">Rp 0</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center p-4 bg-purple-50 rounded-lg">
-                            <span class="font-semibold text-gray-700">Total Keuntungan:</span>
-                            <span id="hasilTotalKeuntungan" class="font-bold text-purple-600 text-xl">Rp 0</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center p-4 bg-indigo-50 rounded-lg">
-                            <span class="font-semibold text-gray-700">Total Omzet:</span>
-                            <span id="hasilTotalOmzet" class="font-bold text-indigo-600 text-xl">Rp 0</span>
-                        </div>
-                    </div>
+            <!-- 1. Biaya Bahan Baku -->
+            <div>
+                <h2 class="text-lg font-semibold text-blue-600 mb-3 border-b pb-2">1. Biaya Bahan Baku Langsung</h2>
+                <div id="material-list" class="space-y-2">
+                    <!-- Baris bahan baku akan ditambahkan oleh JS di sini -->
                 </div>
-
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-red-50 rounded-lg p-6">
-                        <h3 class="font-semibold text-red-800 mb-4">💸 Rincian Biaya per Unit:</h3>
-                        <div id="rincianBiaya" class="text-sm text-red-700 space-y-2">
-                            <!-- Rincian akan diisi oleh JavaScript -->
-                        </div>
-                    </div>
-
-                    <div class="bg-green-50 rounded-lg p-6">
-                        <h3 class="font-semibold text-green-800 mb-4">📈 Analisis Profitabilitas:</h3>
-                        <div id="analisisProfitabilitas" class="text-sm text-green-700 space-y-2">
-                            <!-- Analisis akan diisi oleh JavaScript -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6 flex gap-4">
-                    <button onclick="resetForm()" class="flex-1 bg-gray-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-200">
-                        🔄 Hitung Ulang
-                    </button>
-                    <button onclick="cetakHasil()" class="flex-1 bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition-colors duration-200">
-                        🖨️ Cetak Hasil
-                    </button>
+                <button id="add-material" class="mt-3 text-sm bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-sm transition duration-200">
+                    + Tambah Bahan Baku
+                </button>
+                <div class="mt-4 bg-blue-50 p-3 rounded-lg flex justify-between items-center">
+                    <span class="font-semibold text-blue-800">Total Biaya Bahan Baku:</span>
+                    <span id="total-material-cost" class="font-bold text-lg text-blue-800">Rp 0</span>
                 </div>
             </div>
-        </main>
 
-        <footer class="text-center mt-12 text-gray-600">
-            <p class="text-sm">💼 Kalkulator HPP Lengkap - Analisis biaya produksi yang akurat untuk bisnis Anda</p>
-        </footer>
+            <!-- 2. Biaya Tenaga Kerja Langsung -->
+            <div>
+                <h2 class="text-lg font-semibold text-green-600 mb-3 border-b pb-2">2. Biaya Tenaga Kerja Langsung</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="labor-hours" class="block text-sm font-medium text-gray-700">Waktu Pengerjaan (Jam)</label>
+                        <input type="number" id="labor-hours" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Contoh: 2">
+                    </div>
+                    <div>
+                        <label for="labor-rate" class="block text-sm font-medium text-gray-700">Upah per Jam (Rp)</label>
+                        <input type="number" id="labor-rate" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Contoh: 15000">
+                    </div>
+                </div>
+                <div class="mt-4 bg-green-50 p-3 rounded-lg flex justify-between items-center">
+                    <span class="font-semibold text-green-800">Total Biaya Tenaga Kerja:</span>
+                    <span id="total-labor-cost" class="font-bold text-lg text-green-800">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- 3. Biaya Overhead -->
+            <div>
+                <h2 class="text-lg font-semibold text-yellow-600 mb-3 border-b pb-2">3. Biaya Overhead (per Batch)</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label for="packaging-cost" class="block text-sm font-medium text-gray-700">Biaya Kemasan (Rp)</label>
+                        <input type="number" id="packaging-cost" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="Total boks, stiker...">
+                    </div>
+                    <div>
+                        <label for="utility-cost" class="block text-sm font-medium text-gray-700">Biaya Utilitas (Rp)</label>
+                        <input type="number" id="utility-cost" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="Gas, listrik, air...">
+                    </div>
+                    <div>
+                        <label for="other-cost" class="block text-sm font-medium text-gray-700">Biaya Lain-lain (Rp)</label>
+                        <input type="number" id="other-cost" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="Sewa, depresiasi...">
+                    </div>
+                </div>
+                <div class="mt-4 bg-yellow-50 p-3 rounded-lg flex justify-between items-center">
+                    <span class="font-semibold text-yellow-800">Total Biaya Overhead:</span>
+                    <span id="total-overhead-cost" class="font-bold text-lg text-yellow-800">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- 4. Total Biaya Produksi -->
+            <div class="bg-gray-100 p-4 rounded-lg">
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold text-gray-800">Total Biaya Produksi (HPP):</span>
+                    <span id="total-production-cost" class="text-2xl font-extrabold text-gray-900">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- 5. Perhitungan HPP per Produk -->
+            <div>
+                <h2 class="text-lg font-semibold text-indigo-600 mb-3 border-b pb-2">4. Perhitungan HPP per Produk</h2>
+                <div>
+                    <label for="units-produced" class="block text-sm font-medium text-gray-700">Jumlah Produk Dihasilkan (per Batch)</label>
+                    <input type="number" id="units-produced" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Contoh: 50 pcs/boks">
+                </div>
+            </div>
+
+            <!-- HASIL AKHIR -->
+            <div class="bg-indigo-600 text-white p-6 rounded-lg text-center">
+                <label class="block text-sm font-medium text-indigo-200">HPP per Produk</label>
+                <div id="hpp-per-unit" class="text-4xl font-extrabold mt-1">Rp 0</div>
+            </div>
+
+            <!-- Tombol Reset -->
+            <button id="reset-button" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-sm transition duration-200">
+                Atur Ulang (Reset)
+            </button>
+        </div>
+
     </div>
 
     <script>
-        function formatRupiah(angka) {
-            return new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            }).format(angka);
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Referensi Elemen DOM
+            const materialList = document.getElementById('material-list');
+            const addMaterialButton = document.getElementById('add-material');
+            const laborHoursInput = document.getElementById('labor-hours');
+            const laborRateInput = document.getElementById('labor-rate');
+            const packagingCostInput = document.getElementById('packaging-cost');
+            const utilityCostInput = document.getElementById('utility-cost');
+            const otherCostInput = document.getElementById('other-cost');
+            const unitsProducedInput = document.getElementById('units-produced');
+            const resetButton = document.getElementById('reset-button');
 
-        function hitungHPP() {
-            // Ambil data input
-            const namaProduk = document.getElementById('namaProduk').value || 'Produk';
-            const kategoriProduk = document.getElementById('kategoriProduk').value;
-            const jumlahProduksi = parseFloat(document.getElementById('jumlahProduksi').value) || 1;
-            const periodeProduksi = document.getElementById('periodeProduksi').value;
+            // Referensi Elemen Tampilan
+            const totalMaterialCostEl = document.getElementById('total-material-cost');
+            const totalLaborCostEl = document.getElementById('total-labor-cost');
+            const totalOverheadCostEl = document.getElementById('total-overhead-cost');
+            const totalProductionCostEl = document.getElementById('total-production-cost');
+            const hppPerUnitEl = document.getElementById('hpp-per-unit');
 
-            // Biaya Bahan Baku
-            const bahanUtama = parseFloat(document.getElementById('bahanUtama').value) || 0;
-            const bahanPendukung = parseFloat(document.getElementById('bahanPendukung').value) || 0;
-            const bahanKemasan = parseFloat(document.getElementById('bahanKemasan').value) || 0;
-            const bahanLainnya = parseFloat(document.getElementById('bahanLainnya').value) || 0;
-            const totalBahanBaku = bahanUtama + bahanPendukung + bahanKemasan + bahanLainnya;
+            // Fungsi untuk memformat Angka ke Rupiah
+            const formatRupiah = (number) => {
+                return new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                }).format(number);
+            };
 
-            // Biaya Tenaga Kerja
-            const gajiKaryawan = parseFloat(document.getElementById('gajiKaryawan').value) || 0;
-            const upahBorongan = parseFloat(document.getElementById('upahBorongan').value) || 0;
-            const tunjangan = parseFloat(document.getElementById('tunjangan').value) || 0;
-            const jamKerjaBulan = parseFloat(document.getElementById('jamKerjaBulan').value) || 160;
-            const totalTenagaKerja = gajiKaryawan + upahBorongan + tunjangan;
+            // Fungsi untuk menambah baris bahan baku baru
+            const addMaterialRow = () => {
+                const row = document.createElement('div');
+                row.className = 'flex gap-2 mb-2 material-row';
+                
+                row.innerHTML = `
+                    <input type="text" class="material-name flex-grow p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Nama Bahan">
+                    <input type="number" class="material-cost w-32 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Biaya (Rp)">
+                    <button class="remove-material bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-md text-sm">Hapus</button>
+                `;
 
-            // Biaya Overhead
-            const sewaTempat = parseFloat(document.getElementById('sewaTempat').value) || 0;
-            const listrik = parseFloat(document.getElementById('listrik').value) || 0;
-            const air = parseFloat(document.getElementById('air').value) || 0;
-            const internet = parseFloat(document.getElementById('internet').value) || 0;
-            const asuransi = parseFloat(document.getElementById('asuransi').value) || 0;
-            const perawatan = parseFloat(document.getElementById('perawatan').value) || 0;
-            const totalOverhead = sewaTempat + listrik + air + internet + asuransi + perawatan;
+                materialList.appendChild(row);
+                
+                // Tambah event listener untuk input baru
+                row.querySelector('.material-cost').addEventListener('input', calculateHPP);
+                
+                // Tambah event listener untuk tombol hapus
+                row.querySelector('.remove-material').addEventListener('click', () => {
+                    row.remove();
+                    calculateHPP();
+                });
+            };
 
-            // Biaya Pemasaran
-            const iklan = parseFloat(document.getElementById('iklan').value) || 0;
-            const komisiPenjualan = parseFloat(document.getElementById('komisiPenjualan').value) || 0;
-            const ongkosKirim = parseFloat(document.getElementById('ongkosKirim').value) || 0;
-            const marketplace = parseFloat(document.getElementById('marketplace').value) || 0;
-            const totalPemasaran = iklan + komisiPenjualan + ongkosKirim + marketplace;
+            // Fungsi utama untuk menghitung HPP
+            const calculateHPP = () => {
+                // 1. Hitung Total Biaya Bahan Baku
+                let totalMaterialCost = 0;
+                document.querySelectorAll('.material-cost').forEach(input => {
+                    totalMaterialCost += parseFloat(input.value) || 0;
+                });
+                totalMaterialCostEl.textContent = formatRupiah(totalMaterialCost);
 
-            // Biaya Administrasi
-            const administrasi = parseFloat(document.getElementById('administrasi').value) || 0;
-            const pajak = parseFloat(document.getElementById('pajak').value) || 0;
-            const penyusutan = parseFloat(document.getElementById('penyusutan').value) || 0;
-            const totalAdministrasi = administrasi + pajak + penyusutan;
+                // 2. Hitung Total Biaya Tenaga Kerja
+                const laborHours = parseFloat(laborHoursInput.value) || 0;
+                const laborRate = parseFloat(laborRateInput.value) || 0;
+                const totalLaborCost = laborHours * laborRate;
+                totalLaborCostEl.textContent = formatRupiah(totalLaborCost);
 
-            // Margin Keuntungan
-            const marginKeuntungan = parseFloat(document.getElementById('marginKeuntungan').value) || 0;
+                // 3. Hitung Total Biaya Overhead
+                const packagingCost = parseFloat(packagingCostInput.value) || 0;
+                const utilityCost = parseFloat(utilityCostInput.value) || 0;
+                const otherCost = parseFloat(otherCostInput.value) || 0;
+                const totalOverheadCost = packagingCost + utilityCost + otherCost;
+                totalOverheadCostEl.textContent = formatRupiah(totalOverheadCost);
 
-            // Konversi periode ke faktor pengali
-            let faktorPeriode = 1;
-            switch(periodeProduksi) {
-                case 'harian': faktorPeriode = 30; break;
-                case 'mingguan': faktorPeriode = 4; break;
-                case 'bulanan': faktorPeriode = 1; break;
-                case 'tahunan': faktorPeriode = 1/12; break;
-            }
+                // 4. Hitung Total Biaya Produksi
+                const totalProductionCost = totalMaterialCost + totalLaborCost + totalOverheadCost;
+                totalProductionCostEl.textContent = formatRupiah(totalProductionCost);
 
-            // Hitung total biaya per periode
-            const totalBiayaTetap = (totalTenagaKerja + totalOverhead + totalPemasaran + totalAdministrasi) * faktorPeriode;
-            
-            // Hitung HPP per unit
-            const biayaBahanPerUnit = totalBahanBaku / jumlahProduksi;
-            const biayaTetapPerUnit = totalBiayaTetap / jumlahProduksi;
-            const hppPerUnit = biayaBahanPerUnit + biayaTetapPerUnit;
+                // 5. Hitung HPP per Produk
+                const unitsProduced = parseFloat(unitsProducedInput.value) || 0;
+                let hppPerUnit = 0;
+                if (unitsProduced > 0) {
+                    hppPerUnit = totalProductionCost / unitsProduced;
+                }
+                hppPerUnitEl.textContent = formatRupiah(hppPerUnit);
+            };
 
-            // Hitung harga jual dan keuntungan
-            const keuntunganPerUnit = (hppPerUnit * marginKeuntungan) / 100;
-            const hargaJual = hppPerUnit + keuntunganPerUnit;
-            const totalKeuntungan = keuntunganPerUnit * jumlahProduksi;
-            const totalOmzet = hargaJual * jumlahProduksi;
+            // Fungsi untuk Reset
+            const resetCalculator = () => {
+                // Hapus semua baris bahan baku
+                materialList.innerHTML = '';
+                // Tambah satu baris kosong
+                addMaterialRow();
+                
+                // Kosongkan semua input
+                laborHoursInput.value = '';
+                laborRateInput.value = '';
+                packagingCostInput.value = '';
+                utilityCostInput.value = '';
+                otherCostInput.value = '';
+                unitsProducedInput.value = '';
 
-            // Tampilkan hasil
-            document.getElementById('hasilNamaProduk').textContent = namaProduk;
-            document.getElementById('hasilHPP').textContent = formatRupiah(hppPerUnit);
-            document.getElementById('hasilHargaJual').textContent = formatRupiah(hargaJual);
-            document.getElementById('hasilKeuntungan').textContent = formatRupiah(keuntunganPerUnit);
-            document.getElementById('hasilTotalKeuntungan').textContent = formatRupiah(totalKeuntungan);
-            document.getElementById('hasilTotalOmzet').textContent = formatRupiah(totalOmzet);
+                // Hitung ulang (akan me-reset semua total ke 0)
+                calculateHPP();
+            };
 
-            // Rincian biaya
-            const rincianBiaya = document.getElementById('rincianBiaya');
-            rincianBiaya.innerHTML = `
-                <div class="flex justify-between"><span>• Bahan Baku per Unit:</span><span>${formatRupiah(biayaBahanPerUnit)}</span></div>
-                <div class="flex justify-between"><span>• Biaya Tetap per Unit:</span><span>${formatRupiah(biayaTetapPerUnit)}</span></div>
-                <div class="flex justify-between border-t pt-2 mt-2 font-semibold"><span>Total HPP per Unit:</span><span>${formatRupiah(hppPerUnit)}</span></div>
-                <div class="mt-3 text-xs">
-                    <div>Rincian Bahan Baku: ${formatRupiah(totalBahanBaku)}</div>
-                    <div>Rincian Biaya Tetap: ${formatRupiah(totalBiayaTetap)}</div>
-                    <div>Jumlah Produksi: ${jumlahProduksi} unit</div>
-                </div>
-            `;
+            // Tambah Event Listeners
+            addMaterialButton.addEventListener('click', addMaterialRow);
+            resetButton.addEventListener('click', resetCalculator);
 
-            // Analisis profitabilitas
-            const marginPersen = ((keuntunganPerUnit / hargaJual) * 100).toFixed(1);
-            const roiPersen = ((totalKeuntungan / (totalBahanBaku + totalBiayaTetap)) * 100).toFixed(1);
-            
-            const analisisProfitabilitas = document.getElementById('analisisProfitabilitas');
-            analisisProfitabilitas.innerHTML = `
-                <div class="flex justify-between"><span>• Margin Profit:</span><span>${marginPersen}%</span></div>
-                <div class="flex justify-between"><span>• ROI (Return on Investment):</span><span>${roiPersen}%</span></div>
-                <div class="flex justify-between"><span>• Break Even Point:</span><span>${Math.ceil((totalBiayaTetap + totalBahanBaku) / hargaJual)} unit</span></div>
-                <div class="mt-3 text-xs">
-                    <div>Kategori: ${kategoriProduk || 'Tidak dipilih'}</div>
-                    <div>Periode: ${periodeProduksi}</div>
-                    <div>Target Margin: ${marginKeuntungan}%</div>
-                </div>
-            `;
-
-            // Tampilkan hasil
-            document.getElementById('hasilKalkulasi').classList.remove('hidden');
-            document.getElementById('hasilKalkulasi').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function resetForm() {
-            document.getElementById('hppForm').reset();
-            document.getElementById('hasilKalkulasi').classList.add('hidden');
-            document.querySelector('header').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function cetakHasil() {
-            const printContent = document.getElementById('hasilKalkulasi').innerHTML;
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <html>
-                <head>
-                    <title>Hasil Kalkulasi HPP</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; margin: 20px; }
-                        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-                        .space-y-4 > * + * { margin-top: 16px; }
-                        .p-4 { padding: 16px; }
-                        .rounded-lg { border-radius: 8px; }
-                        .bg-gray-50 { background-color: #f9fafb; }
-                        .bg-blue-50 { background-color: #eff6ff; }
-                        .bg-green-50 { background-color: #f0fdf4; }
-                        .bg-yellow-50 { background-color: #fefce8; }
-                        .bg-purple-50 { background-color: #faf5ff; }
-                        .bg-indigo-50 { background-color: #eef2ff; }
-                        .bg-red-50 { background-color: #fef2f2; }
-                        .font-bold { font-weight: bold; }
-                        .text-xl { font-size: 1.25rem; }
-                        .text-2xl { font-size: 1.5rem; }
-                        .text-center { text-align: center; }
-                        .mb-6 { margin-bottom: 24px; }
-                        .mb-4 { margin-bottom: 16px; }
-                        .mt-6 { margin-top: 24px; }
-                        button { display: none; }
-                    </style>
-                </head>
-                <body>
-                    <h1 style="text-align: center; margin-bottom: 30px;">📊 Hasil Kalkulasi HPP Lengkap</h1>
-                    ${printContent}
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-            printWindow.print();
-        }
-
-        document.getElementById('hppForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            hitungHPP();
-        });
-
-        // Auto-format input angka
-        const numberInputs = document.querySelectorAll('input[type="number"]');
-        numberInputs.forEach(input => {
-            input.addEventListener('input', function() {
-                if (this.value < 0) this.value = 0;
+            const allInputs = [
+                laborHoursInput, laborRateInput, packagingCostInput, 
+                utilityCostInput, otherCostInput, unitsProducedInput
+            ];
+            allInputs.forEach(input => {
+                input.addEventListener('input', calculateHPP);
             });
+
+            // Inisialisasi: tambahkan satu baris bahan baku saat memuat
+            addMaterialRow();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9915a7fae3fe71ba',t:'MTc2MDkzMzMyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
